@@ -27,7 +27,7 @@ services:
       - CAPABILITY_POLICY_SERVICE_URL=http://capability-policy-service:8084
       - MEMORY_SERVICE_URL=http://memory-service:8083
       - SUPABASE_DB_URL=${SUPABASE_DB_URL}
-      - UPSTASH_REDIS_URL=${UPSTASH_REDIS_URL:-${REDIS_URL}}
+      - UPSTASH_REDIS_URL=${UPSTASH_REDIS_URL}
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
       - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
       - GOOGLE_REDIRECT_URL=${GOOGLE_REDIRECT_URL}
@@ -60,6 +60,7 @@ services:
       - GEMINI_FALLBACK_MODEL=${GEMINI_FALLBACK_MODEL:-gemini-2.0-flash}
       - MEMORY_SERVICE_URL=http://memory-service:8083
       - CAPABILITY_POLICY_SERVICE_URL=http://capability-policy-service:8084
+      - READINESS_HMAC_SECRET=${READINESS_HMAC_SECRET}
     networks:
       - deltix-overlay
     deploy:
@@ -75,8 +76,8 @@ services:
     environment:
       - PORT=8082
       - SUPABASE_DB_URL=${SUPABASE_DB_URL}
-      - UPSTASH_REDIS_URL=${UPSTASH_REDIS_URL:-${REDIS_URL}}
-      - REDIS_URL=${REDIS_URL:-${UPSTASH_REDIS_URL}}
+      - UPSTASH_REDIS_URL=${UPSTASH_REDIS_URL}
+      - REDIS_URL=${UPSTASH_REDIS_URL}
       - WORKER_BRIDGE_URL=http://agent-runtime-worker:8085
       - READINESS_HMAC_SECRET=${READINESS_HMAC_SECRET}
     networks:
@@ -97,6 +98,7 @@ services:
       - GEMINI_API_KEY=${GEMINI_API_KEY}
       - MEMORY_SERVICE_URL=http://memory-service:8083
       - CAPABILITY_POLICY_SERVICE_URL=http://capability-policy-service:8084
+      - READINESS_HMAC_SECRET=${READINESS_HMAC_SECRET}
       - PAYPAL_CLIENT_ID=${PAYPAL_CLIENT_ID}
       - PAYPAL_CLIENT_SECRET=${PAYPAL_CLIENT_SECRET}
       - PAYPAL_ENVIRONMENT=${PAYPAL_ENVIRONMENT:-sandbox}
