@@ -20,12 +20,18 @@ services:
     environment:
       - PORT=8080
       - FRONTEND_URL=${FRONTEND_URL:-*}
+      - GATEWAY_CORS_ORIGINS=${GATEWAY_CORS_ORIGINS:-*}
+      - GATEWAY_COOKIE_SECURE=${GATEWAY_COOKIE_SECURE:-true}
       - COMPILER_SERVICE_URL=http://agent-compiler-service:8081
       - RUNTIME_SERVICE_URL=http://agent-runtime-service:8082
       - CAPABILITY_POLICY_SERVICE_URL=http://capability-policy-service:8084
       - MEMORY_SERVICE_URL=http://memory-service:8083
       - SUPABASE_DB_URL=${SUPABASE_DB_URL}
-      - GATEWAY_JWT_SECRET=${GATEWAY_JWT_SECRET}
+      - UPSTASH_REDIS_URL=${UPSTASH_REDIS_URL:-${REDIS_URL}}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - GOOGLE_REDIRECT_URL=${GOOGLE_REDIRECT_URL}
+      - GATEWAY_JWT_SECRET=${GATEWAY_JWT_SECRET:-deltix}
       - GATEWAY_ALLOW_DEV_AUTH=${GATEWAY_ALLOW_DEV_AUTH:-false}
     networks:
       - deltix-overlay
@@ -69,7 +75,8 @@ services:
     environment:
       - PORT=8082
       - SUPABASE_DB_URL=${SUPABASE_DB_URL}
-      - REDIS_URL=${REDIS_URL}
+      - UPSTASH_REDIS_URL=${UPSTASH_REDIS_URL:-${REDIS_URL}}
+      - REDIS_URL=${REDIS_URL:-${UPSTASH_REDIS_URL}}
       - WORKER_BRIDGE_URL=http://agent-runtime-worker:8085
       - READINESS_HMAC_SECRET=${READINESS_HMAC_SECRET}
     networks:
