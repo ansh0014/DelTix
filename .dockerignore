@@ -9,3 +9,5 @@ frontend/out
 **/__pycache__
 **/*.pyc
 *.log
+vendor
+**/vendor

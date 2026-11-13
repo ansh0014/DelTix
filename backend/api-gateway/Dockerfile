@@ -24,7 +24,7 @@ COPY backend/shared/ ./backend/shared/
 COPY backend/api-gateway/ ./backend/api-gateway/
 
 WORKDIR /src/backend/api-gateway
-RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w" -o /bin/api-gateway ./cmd/main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -mod=readonly -trimpath -ldflags="-s -w" -o /bin/api-gateway ./cmd/main.go
 
 # --- Stage 2: Minimal scratch/alpine runtime ---
 FROM alpine:3.20 AS runner

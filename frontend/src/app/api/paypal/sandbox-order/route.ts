@@ -9,7 +9,11 @@ function loadEnvFallback(): Record<string, string> {
   const vars: Record<string, string> = {};
   const candidates = [
     path.resolve(process.cwd(), ".env"),
+    path.resolve(process.cwd(), ".env.local"),
     path.resolve(process.cwd(), "..", ".env"),
+    path.resolve(process.cwd(), "..", ".env.local"),
+    path.resolve(process.cwd(), "frontend", ".env"),
+    path.resolve(process.cwd(), "frontend", ".env.local"),
   ];
   for (const filePath of candidates) {
     try {

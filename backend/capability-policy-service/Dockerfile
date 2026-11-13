@@ -24,7 +24,7 @@ COPY backend/shared/ ./backend/shared/
 COPY backend/capability-policy-service/ ./backend/capability-policy-service/
 
 WORKDIR /src/backend/capability-policy-service
-RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w" -o /bin/capability-policy-service ./cmd/main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -mod=readonly -trimpath -ldflags="-s -w" -o /bin/capability-policy-service ./cmd/main.go
 
 # --- Stage 2: Minimal runtime ---
 FROM alpine:3.20 AS runner
